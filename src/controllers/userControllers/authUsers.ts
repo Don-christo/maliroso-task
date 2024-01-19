@@ -11,11 +11,7 @@ import { passwordUtils, PasswordHarsher, Jwt } from "../../utilities/helpers";
 import logger from "../../utilities/logger";
 import { registerSchema, loginSchema } from "../../utilities/validators";
 import Users from "../../models/users";
-// import { stage } from "../../config/dbconfig";
 import { ENV } from "../../config";
-import dotenv from "dotenv"
-
-dotenv.config();
 
 export const registerUser = async (req: Request, res: Response) => {
   const passwordRegex = passwordUtils.regex;
@@ -112,7 +108,7 @@ export const loginUser = async (req: Request, res: Response) => {
         res.cookie(REFRESH_TOKEN, refreshToken, {
           httpOnly: true,
           sameSite: "strict",
-          secure: ENV.IS_PROD//stage==='production',
+          secure: ENV.IS_PROD,
         });
 
         // Return basic user data to client-side
