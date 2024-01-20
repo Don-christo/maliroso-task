@@ -4,7 +4,6 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:production": "tsc && node bin/www",
     "prod": "cross-env NODE_ENV=production nodemon ./dist/app.js",
     "dev": "cross-env NODE_ENV=development nodemon ./dist/app.js",
     "build": "tsc",
