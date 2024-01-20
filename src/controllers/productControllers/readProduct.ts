@@ -6,7 +6,7 @@ import logger from "../../utilities/logger";
 
 export const readProduct = async (req: RequestExt, res: Response) => {
   try {
-    const productId = req.params.productId;
+    const productId = req.params.id;
 
     // Find the product by ID
     const product = await Products.findByPk(productId);

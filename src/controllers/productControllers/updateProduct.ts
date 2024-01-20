@@ -5,10 +5,11 @@ import Products from "../../models/product";
 import logger from "../../utilities/logger";
 
 export const updateProduct = async (req: RequestExt, res: Response) => {
-  try {
-    const { _user: user, _userId: userId, ...rest } = req.body;
-    const productId = req.params.productId;
+  const { _user: user, _userId: userId, ...rest } = req.body;
 
+  const productId = req.params.id;
+
+  try {
     // Find the product by ID
     const existingProduct = await Products.findByPk(productId);
 

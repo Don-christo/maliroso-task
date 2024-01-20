@@ -9,9 +9,9 @@ import { db } from "../config";
 const TABLE_NAME = "Users";
 
 // https://sequelize.org/docs/v6/other-topics/typescript/
-class Users extends Model<
-  InferAttributes<Users>,
-  InferCreationAttributes<Users>
+class User extends Model<
+  InferAttributes<User>,
+  InferCreationAttributes<User>
 > {
   declare id: string;
   declare firstName: string;
@@ -21,7 +21,7 @@ class Users extends Model<
   declare password: string;
 }
 
-Users.init(
+User.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -57,4 +57,4 @@ Users.init(
   }
 );
 
-export default Users;
+export default User;

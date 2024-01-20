@@ -10,7 +10,7 @@ import {
 import { passwordUtils, PasswordHarsher, Jwt } from "../../utilities/helpers";
 import logger from "../../utilities/logger";
 import { registerSchema, loginSchema } from "../../utilities/validators";
-import Users from "../../models/users";
+import User from "../../models/users";
 import { ENV } from "../../config";
 
 export const registerUser = async (req: Request, res: Response) => {
@@ -27,7 +27,7 @@ export const registerUser = async (req: Request, res: Response) => {
           message: passwordUtils.error,
         });
       }
-      const userExist = await Users.findOne({
+      const userExist = await User.findOne({
         where: {
           [Op.or]: [{ email: newEmail }, { phone: phone }],
         },
@@ -36,7 +36,7 @@ export const registerUser = async (req: Request, res: Response) => {
         const hashedPassword = await PasswordHarsher.hash(password);
         const id = uuidV4();
 
-        const user = await Users.create({
+        const user = await User.create({
           id,
           firstName,
           lastName,
@@ -81,7 +81,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
     const { email, password } = validationResult.data;
 
-    const confirmUser = await Users.findOne({
+    const confirmUser = await User.findOne({
       where: { email: email },
     });
 

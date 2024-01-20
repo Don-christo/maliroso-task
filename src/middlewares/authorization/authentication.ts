@@ -4,12 +4,12 @@ import {
   JWT_EXPIRATION_STATUS_CODE,
   JWT_INVALID_STATUS_CODE,
 } from "../../constants";
-import Users from "../../models/users";
+import User from "../../models/users";
 import { Jwt } from "../../utilities/helpers";
 
 export interface RequestExt extends Request {
   body: Request["body"] & {
-    _user?: Users;
+    _user?: User;
     _userId?: string;
   };
 }
@@ -30,12 +30,12 @@ export const authorizationMiddleware = async (
 
   const token = authorization.split(" ")[1] as string;
 
-  const { data, expired, valid } = await Jwt.isTokenExpired<Users>(token);
+  const { data, expired, valid } = await Jwt.isTokenExpired<User>(token);
 
   if (!expired && valid) {
     req.body["_userId"] = data.id;
 
-    req.body["_user"] = await Users.findOne({
+    req.body["_user"] = await User.findOne({
       where: { id: data.id },
     });
     return next();

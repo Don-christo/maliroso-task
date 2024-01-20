@@ -67,7 +67,7 @@ router.post("/createProduct", authorizationMiddleware, createProduct);
  *   name: Products
  *   description: APIs for managing products
  * paths:
- *   /api/v1/products/{productId}:
+ *   /api/v1/products/readProduct/{productId}:
  *     get:
  *       summary: Retrieve product by ID
  *       tags: [Products]
@@ -105,7 +105,7 @@ router.post("/createProduct", authorizationMiddleware, createProduct);
  *               example:
  *                 message: "Internal Server Error, please try again later"
  */
-router.get("/readProduct", authorizationMiddleware, readProduct);
+router.get("/readProduct/:id", authorizationMiddleware, readProduct);
 
 /**
  * @swagger
@@ -113,7 +113,7 @@ router.get("/readProduct", authorizationMiddleware, readProduct);
  *   name: Products
  *   description: APIs for managing products
  * paths:
- *   /api/v1/products/{productId}:
+ *   /api/v1/products/updateProduct/{productId}:
  *     put:
  *       summary: Update product by ID
  *       tags: [Products]
@@ -162,7 +162,7 @@ router.get("/readProduct", authorizationMiddleware, readProduct);
  *               example:
  *                 message: "Internal Server Error, please try again later"
  */
-router.put("/updateProduct", authorizationMiddleware, updateProduct);
+router.put("/updateProduct/:id", authorizationMiddleware, updateProduct);
 
 /**
  * @swagger
@@ -170,7 +170,7 @@ router.put("/updateProduct", authorizationMiddleware, updateProduct);
  *   name: Products
  *   description: APIs for managing products
  * paths:
- *   /api/v1/products/{productId}:
+ *   /api/v1/products/deleteProduct/{productId}:
  *     delete:
  *       summary: Delete product by ID
  *       tags: [Products]
@@ -208,6 +208,6 @@ router.put("/updateProduct", authorizationMiddleware, updateProduct);
  *               example:
  *                 message: "Internal Server Error, please try again later"
  */
-router.delete("/deleteProduct", authorizationMiddleware, deleteProduct);
+router.delete("/deleteProduct/:id", authorizationMiddleware, deleteProduct);
 
 export default router;
