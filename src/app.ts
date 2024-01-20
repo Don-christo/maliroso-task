@@ -68,4 +68,3 @@ app.listen(port, () => {
   )
   console.log(`\nLocal baseUrl, use @ http://localhost:${port}/api/`)
 })
-// module.exports = app;
