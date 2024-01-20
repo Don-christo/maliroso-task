@@ -7,11 +7,9 @@ const router = Router();
  * @swagger
  * components:
  *   schemas:
- *     UserResponse:
+ *     User:
  *       type: object
  *       properties:
- *         message:
- *           type: string
  *         user:
  *           type: object
  *           properties:
@@ -20,6 +18,10 @@ const router = Router();
  *             lastName:
  *               type: string
  *             email:
+ *               type: string
+ *             password:
+ *               type: string
+ *             phone:
  *               type: string
  * tags:
  *   name: Users
@@ -34,7 +36,7 @@ const router = Router();
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/UserResponse'
+ *               $ref: '#/components/schemas/User'
  *       responses:
  *         200:
  *           description: Registration successful
