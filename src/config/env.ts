@@ -25,6 +25,7 @@ const {
   APP_SECRET,
   JWT_SECRET,
   JWT_REFRESH_SECRET,
+  FE_BASE_URL
 } = process.env
 
 const ENV = {
@@ -37,6 +38,7 @@ const ENV = {
   APP_SECRET,
   JWT_SECRET,
   JWT_REFRESH_SECRET,
+  FE_BASE_URL,
   IS_PROD: isProduction,
 }
 

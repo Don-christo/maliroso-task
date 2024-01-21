@@ -13,20 +13,29 @@ import specs from "./swagger";
 dotenv.config();
 
 const app = express();
-const port = ENV.PORT || 5500
+const port = ENV.PORT || 5500;
 
-app.use(cors());
-app.use((_req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // Allow requests from any origin
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+const allowedOrigins: Array<string> = [
+  ENV.FE_BASE_URL as string,
+  // CORS allow use of swagger on local environment
+  ENV.IS_PROD ? "" : `http://localhost:${port}`,
+].filter(Boolean);
+
+const corsOptions: cors.CorsOptions = {
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+app.use((_req: Request, res: Response, next: NextFunction) => {
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
+  res.header("Referrer-Policy", "no-referrer-when-downgrade"); // this header is needed when using http and not https
   next();
 });
-
-app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -65,6 +74,6 @@ app.use(function (err: HttpError, req: Request, res: Response) {
 app.listen(port, () => {
   console.log(
     `\n\nMaliroso Server:\n\nApi docs, open @  http://localhost:${port}/api-docs`
-  )
-  console.log(`\nLocal baseUrl, use @ http://localhost:${port}/api/`)
-})
+  );
+  console.log(`\nLocal baseUrl, use @ http://localhost:${port}/api/`);
+});
